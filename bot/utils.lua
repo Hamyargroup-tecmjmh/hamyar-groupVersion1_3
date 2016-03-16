@@ -810,20 +810,9 @@ function ban_list(chat_id)
   local list = redis:smembers(hash)
   local text = "Ban list !\n\n"
   for k,v in pairs(list) do
- 		local user_info = redis:hgetall('user:'..v)
--- 		vardump(user_info)
-		if user_info then
-		  if user_info.username then
-		    user = '@'..user_info.username
-	    elseif user_info.print_name and not user_info.username then
-	      user = string.gsub(user_info.print_name, "_", " ")
-  	  else 
-        user = ''
-      end
-      text = text..k.." - "..user.." ["..v.."]\n"
-		end
-	end
- return text
+    text = text..k.." - "..v.." \n"
+  end
+  return text
 end
 
 -- Returns globally ban list
@@ -832,20 +821,9 @@ function banall_list()
   local list = redis:smembers(hash)
   local text = "global bans !\n\n"
   for k,v in pairs(list) do
- 		local user_info = redis:hgetall('user:'..v)
--- 		vardump(user_info)
-		if user_info then
-		  if user_info.username then
-		    user = '@'..user_info.username
-	    elseif user_info.print_name and not user_info.username then
-	      user = string.gsub(user_info.print_name, "_", " ")
-  	  else 
-        user = ''
-      end
-      text = text..k.." - "..user.." ["..v.."]\n"
-		end
-	end
- return text
+    text = text..k.." - "..v.." \n"
+  end
+  return text
 end
 
 -- /id by reply
